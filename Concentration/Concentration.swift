@@ -9,14 +9,22 @@ import Foundation
 
 struct Concentration {
     
+    //MARK: - Private properties
+    
     private(set) var cards: [Card] = []
     private(set) var score = 0
     private var seenCards: Set<Int> = []
     private(set) var flipCount = 0
     
     private struct Points {
-        static let matchBonus = 2
-        static let missMatchPenalty = 1
+        static let matchBonus = 20
+        static let missMatchPenalty = 5
+        static let maxTimePenalty = 5
+    }
+    
+    private var dateClick: Date?
+    private var timePenalty: Int {
+        return min(dateClick?.sinceNow ?? 0, Points.maxTimePenalty)
     }
     
     private var indexOfOneAndOnlyFaceUpCard: Int? {
@@ -31,6 +39,8 @@ struct Concentration {
         }
     }
     
+    //MARK: - Initializers
+    
     init(numberOfPairOfCards: Int) {
         for _ in 1...numberOfPairOfCards {
             let card = Card()
@@ -39,19 +49,21 @@ struct Concentration {
         cards.shuffle()
     }
     
+    //MARK: - Public methods
+    
     mutating func chooseCard(at index: Int) {
         if !cards[index].isMatched {
             flipCount += 1
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
-
+                
                 if cards[matchIndex].identifier == cards[index].identifier {
-
+                    
                     cards[matchIndex].isMatched = true
                     cards[index].isMatched = true
-                
+                    
                     score += Points.matchBonus
                 } else {
-
+                    
                     if seenCards.contains(index) {
                         score -= Points.missMatchPenalty
                     }
@@ -61,11 +73,13 @@ struct Concentration {
                     seenCards.insert(index)
                     seenCards.insert(matchIndex)
                 }
+                score -= timePenalty
                 cards[index].isFaceUp = true
                 
             } else {
                 indexOfOneAndOnlyFaceUpCard = index
             }
+            dateClick = Date()
         }
     }
     
@@ -82,8 +96,16 @@ struct Concentration {
     
 }
 
+//MARK: - Extensions
+
 extension Collection {
     var oneAndOnly: Element? {
         return count == 1 ? first : nil
+    }
+}
+
+extension Date {
+    var sinceNow: Int {
+        return -Int(self.timeIntervalSinceNow)
     }
 }

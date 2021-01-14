@@ -9,9 +9,13 @@ import Foundation
 
 struct Card: Hashable {
     
+    //MARK: - Public properties
+    
     var isFaceUp = false
     var isMatched = false
     var identifier: Int
+    
+    //MARK: - Private properties
     
     private static var ​identifierFactory​ = 0
     
@@ -19,6 +23,8 @@ struct Card: Hashable {
         Card.​identifierFactory​ += 1
         return Int(Card.​identifierFactory​)
     }
+    
+    //MARK: - Initializers
     
     init() {
         identifier = Card.getUniqueIdentifier()

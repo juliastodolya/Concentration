@@ -9,21 +9,23 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    //MARK: - IBOutlets
+    
     @IBOutlet var themeLabel: UILabel!
-    
     @IBOutlet var newGameButton: UIButton!
-    
     @IBOutlet private var flipCountLabel: UILabel!
-    
     @IBOutlet var scoreCountLabel: UILabel!
-    
     @IBOutlet private var cardButtons: [UIButton]!
     
-    private lazy var game = Concentration(numberOfPairOfCards: numberOfPairOfCards)
+    //MARK: - Public property
     
     var numberOfPairOfCards: Int {
-            return (cardButtons.count + 1) / 2
+        return (cardButtons.count + 1) / 2
     }
+    
+    //MARK: - Private property
+    
+    private lazy var game = Concentration(numberOfPairOfCards: numberOfPairOfCards)
     
     private struct Theme {
         var name: String
@@ -34,8 +36,8 @@ class ViewController: UIViewController {
     
     private var emojiThemes: [Theme] = [
         Theme(name: "Halloween", emojis: ["🎃", "👻", "💀", "🦇", "🕸", "🧛🏻‍♂️", "🍭", "🌕", "🐺", "🧟‍♀️"], viewColor: .black, cardColor: .orange),
-        Theme(name: "Christmas", emojis: ["🎅", "🎄", "❄️", "⛄️", "🍾", "🎁", "🎈", "🎉", "👨‍👩‍👧‍👦", "🛷"], viewColor: .white, cardColor: .blue),
-        Theme(name: "Food", emojis: ["🍕", "🍣", "🍩", "🍔", "🥗", "🍰", "🍜", "🥡", "🧀", "🥐"], viewColor: .yellow, cardColor: .red),
+        Theme(name: "Christmas", emojis: ["🎅", "🎄", "❄️", "⛄️", "🍾", "🎁", "🎈", "🎉", "👨‍👩‍👧‍👦", "🛷"], viewColor: .white, cardColor: .red),
+        Theme(name: "Food", emojis: ["🍕", "🍣", "🍩", "🍔", "🥗", "🍰", "🍜", "🥡", "🧀", "🥐"], viewColor: .yellow, cardColor: .gray),
         Theme(name: "Sport", emojis: ["⚽️", "🏂", "🚴‍♀️", "🏸", "🥊", "🤺", "🧘‍♀️", "🚣", "🤼‍♂️", "🏀"], viewColor: .lightGray, cardColor: .black),
         Theme(name: "Animals", emojis: ["🐱", "🐶", "🐼", "🐸", "🦊", "🐥", "🐍", "🦦", "🦩", "🐙"], viewColor: .green, cardColor: .yellow),
         Theme(name: "Clothes", emojis: ["🧥", "👙", "👗", "👠", "🕶", "🧤", "🧦", "👔", "🦺", "🧢"], viewColor: .systemPink, cardColor: .white)
@@ -57,14 +59,18 @@ class ViewController: UIViewController {
             updateAppearance()
         }
     }
-        
+    
     private var emoji = [Int: String]()
-
+    
+    //MARK: - Override methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         updateViewFromModel​()
         indexTheme = Int.random(in: 0..<emojiThemes.count)
     }
+    
+    //MARK: - IBAction
     
     @IBAction private func touchCard(_ sender: UIButton) {
         guard let cardNumber = cardButtons.firstIndex(of: sender) else { return }
@@ -77,6 +83,8 @@ class ViewController: UIViewController {
         indexTheme = Int.random(in: 0..<emojiThemes.count)
         updateViewFromModel​()
     }
+    
+    //MARK: - Private methods
     
     private func updateViewFromModel​() {
         for index in cardButtons.indices {
@@ -96,7 +104,7 @@ class ViewController: UIViewController {
     
     private func emoji(for card: Card) -> String {
         if emoji[card.identifier] == nil, emojiChoices.count > 0 {
-               emoji[card.identifier] = emojiChoices.remove(at: Int.random(in: 0..<emojiChoices.count))
+            emoji[card.identifier] = emojiChoices.remove(at: Int.random(in: 0..<emojiChoices.count))
         }
         return emoji[card.identifier] ?? "?"
     }
