@@ -13,6 +13,8 @@
 		A315BD4A25988960007BB80E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A315BD4825988960007BB80E /* Main.storyboard */; };
 		A315BD4C25988963007BB80E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A315BD4B25988963007BB80E /* Assets.xcassets */; };
 		A315BD4F25988963007BB80E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A315BD4D25988963007BB80E /* LaunchScreen.storyboard */; };
+		A315BD5B2598CECE007BB80E /* Concentration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A315BD5A2598CECE007BB80E /* Concentration.swift */; };
+		A315BD5E2598D914007BB80E /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = A315BD5D2598D914007BB80E /* Card.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		A315BD4B25988963007BB80E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A315BD4E25988963007BB80E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A315BD5025988963007BB80E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A315BD5A2598CECE007BB80E /* Concentration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concentration.swift; sourceTree = "<group>"; };
+		A315BD5D2598D914007BB80E /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +60,25 @@
 		A315BD4125988960007BB80E /* Concentration */ = {
 			isa = PBXGroup;
 			children = (
-				A315BD4225988960007BB80E /* AppDelegate.swift */,
+				A315BD5825988B13007BB80E /* SupportingFiles */,
 				A315BD4425988960007BB80E /* SceneDelegate.swift */,
 				A315BD4625988960007BB80E /* ViewController.swift */,
+				A315BD5A2598CECE007BB80E /* Concentration.swift */,
+				A315BD5D2598D914007BB80E /* Card.swift */,
 				A315BD4825988960007BB80E /* Main.storyboard */,
-				A315BD4B25988963007BB80E /* Assets.xcassets */,
-				A315BD4D25988963007BB80E /* LaunchScreen.storyboard */,
 				A315BD5025988963007BB80E /* Info.plist */,
 			);
 			path = Concentration;
+			sourceTree = "<group>";
+		};
+		A315BD5825988B13007BB80E /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				A315BD4225988960007BB80E /* AppDelegate.swift */,
+				A315BD4B25988963007BB80E /* Assets.xcassets */,
+				A315BD4D25988963007BB80E /* LaunchScreen.storyboard */,
+			);
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +152,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A315BD4725988960007BB80E /* ViewController.swift in Sources */,
+				A315BD5B2598CECE007BB80E /* Concentration.swift in Sources */,
+				A315BD5E2598D914007BB80E /* Card.swift in Sources */,
 				A315BD4325988960007BB80E /* AppDelegate.swift in Sources */,
 				A315BD4525988960007BB80E /* SceneDelegate.swift in Sources */,
 			);
@@ -296,7 +312,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Julia-Stodolya.Concentration";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -315,7 +331,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Julia-Stodolya.Concentration";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
