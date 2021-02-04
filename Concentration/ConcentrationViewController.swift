@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ConcentrationViewController: UIViewController {
     
     //MARK: - IBOutlets
     
@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     //MARK: - Public property
     
     var numberOfPairOfCards: Int {
-        return (cardButtons.count + 1) / 2
+        return (visibleCardButtons.count + 1) / 2
     }
     
     //MARK: - Private property
@@ -62,6 +62,10 @@ class ViewController: UIViewController {
     
     private var emoji = [Int: String]()
     
+    private var visibleCardButtons: [UIButton]! {
+        return cardButtons.filter{!$0.superview!.isHidden}
+    }
+    
     //MARK: - Override methods
     
     override func viewDidLoad() {
@@ -70,10 +74,15 @@ class ViewController: UIViewController {
         indexTheme = Int.random(in: 0..<emojiThemes.count)
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateViewFromModel​()
+    }
+    
     //MARK: - IBAction
     
     @IBAction private func touchCard(_ sender: UIButton) {
-        guard let cardNumber = cardButtons.firstIndex(of: sender) else { return }
+        guard let cardNumber = visibleCardButtons.firstIndex(of: sender) else { return }
         game.chooseCard(at: cardNumber)
         updateViewFromModel​()
     }
@@ -87,8 +96,8 @@ class ViewController: UIViewController {
     //MARK: - Private methods
     
     private func updateViewFromModel​() {
-        for index in cardButtons.indices {
-            let button = cardButtons[index]
+        for index in visibleCardButtons.indices {
+            let button = visibleCardButtons[index]
             let card = game.cards[index]
             if card.isFaceUp {
                 button.setTitle(emoji(for: card), for: .normal)
